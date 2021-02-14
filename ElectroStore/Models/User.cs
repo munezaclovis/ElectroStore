@@ -16,7 +16,7 @@ namespace ElectroStore.Models
         public string Lastname { set; get; }
 
         [Required]
-        public string Status { set; get; } = "A";
+        public bool Deleted { set; get; } = false;
 
         public ICollection<UserRole> UsersRoles { get; set; }
     }

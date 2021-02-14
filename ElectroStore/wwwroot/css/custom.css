@@ -17,3 +17,7 @@ body {
 .menu :hover {
     background-color: #a4ffff;
 }
+
+.text-danger{
+    color:red;
+}

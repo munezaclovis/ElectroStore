@@ -1,3 +1,4 @@
+using ElectroStore.Core;
 using ElectroStore.Data;
 using ElectroStore.Models;
 using Microsoft.AspNetCore.Builder;
@@ -33,7 +34,7 @@ namespace ElectroStore
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options =>
+            services.AddDefaultIdentity<User>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.User.RequireUniqueEmail = true;
@@ -42,13 +43,13 @@ namespace ElectroStore
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddControllersWithViews();
-            services.AddScoped<IUserClaimsPrincipalFactory<User>, UserClaimsPrincipalFactory<User, Role>>();
+            //services.AddScoped<IUserClaimsPrincipalFactory<User>, UserClaimsPrincipalFactory<User, Role>>();
             services.AddRazorPages();
             services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -58,7 +59,6 @@ namespace ElectroStore
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
@@ -76,6 +76,7 @@ namespace ElectroStore
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+            Setup.RunAppDefaultAsync(serviceProvider);
         }
     }
 }

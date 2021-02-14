@@ -14,6 +14,7 @@ namespace ElectroStore.Data
     {
         public DbSet<Brand> Brands { set; get; }
         public DbSet<Category> Categories { set; get; }
+        public DbSet<Product> Products { set; get; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -57,6 +58,13 @@ namespace ElectroStore.Data
 
             builder.Entity<Brand>().HasKey(x => x.Id);
             builder.Entity<Category>().HasKey(x => x.Id);
+            builder.Entity<Product>().HasKey(x => x.Id);
+            builder.Entity<User>().HasIndex(x => x.UserName).IsUnique();
+
+            builder.Entity<Brand>().Property(x => x.Deleted).HasDefaultValue(0);
+            builder.Entity<Category>().Property(x => x.Deleted).HasDefaultValue(0);
+            builder.Entity<Product>().Property(x => x.Deleted).HasDefaultValue(0);
+            builder.Entity<User>().Property(x => x.Deleted).HasDefaultValue(0);
 
 
             builder.Entity<User>().ToTable("User");
