@@ -15,6 +15,11 @@ namespace ElectroStore.Models
         public string Name { set; get; }
 
         [Required]
+        public string Icon { set; get; } = "";
+
+        [Required]
         public bool Deleted { set; get; } = false;
+
+        public ICollection<Product> Products { get; set; }
     }
 }

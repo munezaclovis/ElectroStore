@@ -16,5 +16,7 @@ namespace ElectroStore.Models
 
         [Required]
         public bool Deleted { set; get; } = false;
+
+        public ICollection<Product> Products { get; set; }
     }
 }

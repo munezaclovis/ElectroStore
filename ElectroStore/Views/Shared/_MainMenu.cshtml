@@ -1,0 +1,170 @@
+﻿
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject ApplicationDbContext _context
+@{ 
+	MenuManager menuManager = new MenuManager(_context);
+	var menuList = menuManager.getMenu();
+	int count = 0;
+	int size = menuList.Count;
+	int rows = size / 12;
+}
+<ul class="navigation-menu">
+	@if (SignInManager.IsSignedIn(User))
+	{
+		if (User.IsInRole("Manager"))
+		{
+			var ManagerItems = menuList.Where(x => x.AccessLevel.Contains("Manager"));
+
+			foreach (var item in ManagerItems)
+			{
+				var CssClass = "";
+				if (item.SubMenuItem != null) CssClass = "has-submenu";
+				<li class="@CssClass">
+					<a asp-area="@item.Link.Area" asp-controller="@item.Link.Controller" asp-action="@item.Link.Action">
+						<i class="@item.Icon"></i>
+						<span>@item.Diplay</span>
+					</a>
+					@if (item.SubMenuItem != null)
+					{
+						<ul class="submenu row">
+							<div class="col">
+								@foreach (var subItem in item.SubMenuItem.Where(x => x.AccessLevel.Contains("Manager")))
+								{
+									<li>
+										<a asp-area="@subItem.Link.Area" asp-controller="@subItem.Link.Controller" asp-action="@subItem.Link.Action">
+											<i class="@subItem.Icon"></i>
+											@subItem.Diplay
+										</a>
+									</li>
+
+									count++;
+									if ((count % 10) == 0)
+									{
+										@:</div>
+										@:<div class="col">
+									}
+								}
+							</div>
+						</ul>
+					}
+				</li>
+			}
+		}
+		else if (User.IsInRole("Employee"))
+		{
+			var EmployeeItems = menuList.Where(x => x.AccessLevel.Contains("Employee"));
+			foreach (var item in EmployeeItems)
+			{
+				var CssClass = "";
+				if (item.SubMenuItem != null) CssClass = "has-submenu";
+				<li class="@CssClass">
+					<a asp-area="@item.Link.Area" asp-controller="@item.Link.Controller" asp-action="@item.Link.Action">
+						<i class="@item.Icon"></i>
+						<span>@item.Diplay</span>
+					</a>
+					@if (item.SubMenuItem != null)
+					{
+						<ul class="submenu row">
+							<div class="col">
+								@foreach (var subItem in item.SubMenuItem.Where(x => x.AccessLevel.Contains("Employee")))
+								{
+									<li>
+										<a asp-area="@subItem.Link.Area" asp-controller="@subItem.Link.Controller" asp-action="@subItem.Link.Action">
+											<i class="@subItem.Icon"></i>
+											@subItem.Diplay
+										</a>
+									</li>
+
+									count++;
+									if ((count % 12) == 0)
+									{
+									@:</div>
+									@:<div class="col">
+									}
+								}
+							</div>
+						</ul>
+					}
+				</li>
+			}
+		}
+		else if (User.IsInRole("Customer"))
+		{
+			var Customer = menuList.Where(x => x.AccessLevel.Contains("Customer"));
+			foreach (var item in Customer)
+			{
+				var CssClass = "";
+				if (item.SubMenuItem != null) CssClass = "has-submenu";
+				<li class="@CssClass">
+					<a asp-area="@item.Link.Area" asp-controller="@item.Link.Controller" asp-action="@item.Link.Action">
+						<i class="@item.Icon"></i>
+						<span>@item.Diplay</span>
+					</a>
+					@if (item.SubMenuItem != null)
+					{
+						<ul class="submenu row">
+							<div class="col">
+								@foreach (var subItem in item.SubMenuItem.Where(x => x.AccessLevel.Contains("Customer")))
+								{
+									<li>
+										<a asp-area="@subItem.Link.Area" asp-controller="@subItem.Link.Controller" asp-action="@subItem.Link.Action">
+											<i class="@subItem.Icon"></i>
+											@subItem.Diplay
+										</a>
+									</li>
+
+									count++;
+									if ((count % 10) == 0)
+									{
+									@:</div>
+									@:<div class="col">
+									}
+								}
+							</div>
+						</ul>
+					}
+				</li>
+			}
+		}
+	}
+	else
+	{
+		var PlebItems = menuList.Where(x => x.AccessLevel.Contains("Guest"));
+		foreach (var item in PlebItems)
+		{
+			var CssClass = "";
+			if (item.SubMenuItem != null) CssClass = "has-submenu";
+			<li class="@CssClass">
+				<a asp-area="@item.Link.Area" asp-controller="@item.Link.Controller" asp-action="@item.Link.Action">
+					<i class="@item.Icon"></i>
+					<span>@item.Diplay</span>
+				</a>
+				@if (item.SubMenuItem != null)
+				{
+					<ul class="submenu row">
+						<div class="col">
+							@foreach (var subItem in item.SubMenuItem)
+							{
+								<li>
+									<a asp-area="@subItem.Link.Area" asp-controller="@subItem.Link.Controller" asp-action="@subItem.Link.Action">
+										<i class="@subItem.Icon"></i>
+										@subItem.Diplay
+									</a>
+								</li>
+
+								count++;
+								if ((count % 10) == 0)
+								{
+								@:</div>
+								@:<div class="col">
+								}
+							}
+						</div>
+					</ul>
+				}
+			</li>
+		}
+	}
+</ul>

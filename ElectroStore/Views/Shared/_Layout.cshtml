@@ -1,371 +1,110 @@
-﻿@{
-	var dateTime = DateTime.Now.Year.ToString();
-}
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>@ViewData["Title"] - ElectroStore</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta content="A premium admin dashboard template by Mannatthemes" name="description" />
+	<meta content="Mannatthemes" name="author" />
 
-<!DOCTYPE html>
-<html class="no-js" lang="en">
-	<head>
-		<meta charset="utf-8">
+	<!-- App favicon -->
+	<link rel="shortcut icon" href="~/images/favicon.ico">
 
-		<title>@ViewData["Title"] - ElectroStore</title>
+	<!-- App css -->
+	<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/css/icons.css" rel="stylesheet" type="text/css" />
+	<link href="~/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+	<link href="~/css/style.css" rel="stylesheet" type="text/css" />
+	<link href="~/css/custom.css" rel="stylesheet" type="text/css" />
+	@await RenderSectionAsync("Style", required: false)
+</head>
 
-		<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,400italic,700' />
-		<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Patua+One:100,300,400,400italic,700' />
+<body>
+	<div class="topbar">
 
-		@*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
-		<link rel='stylesheet' href='~/css/global.css' />
-		<link rel='stylesheet' href='~/css/structure.css' />
-		<link rel='stylesheet' id='style-static' href='~/css/be_style.css' />
-		<link rel='stylesheet' href='~/css/custom.css' />
+		<!-- Navbar -->
+		<nav class="topbar-main">
+			<!-- LOGO -->
+			<div class="topbar-left">
+				<a asp-area="" asp-controller="Home" asp-action="" class="logo">
+					<span>
+						<img src="~/images/logo-sm.png" alt="logo-small" class="logo-sm">
+					</span>
+					<span>
+						<img src="~/images/logo-dark.png" alt="logo-large" class="logo-lg">
+					</span>
+				</a>
+			</div><!--topbar-left-->
+			<!--end logo-->
+			<partial name="_LoginPartial" />
 
-		<link rel="stylesheet" href="~/plugins/rs-plugin/css/settings.css" />
+			<ul class="list-unstyled topbar-nav mb-0">
+				<li class="hide-phone app-search">
+					<form role="search" class="">
+						<input type="text" placeholder="Search..." class="form-control">
+						<a href=""><i class="fas fa-search"></i></a>
+					</form>
+				</li>
+			</ul><!--end topbar-nav-->
+		</nav>
+		<!-- end navbar-->
+		<!-- MENU Start -->
+		<div class="navbar-custom-menu">
+			<div class="container-fluid">
+				<div id="navigation">
+					<!-- Navigation Menu-->
+					<partial name="_MainMenu" />
+				</div> <!-- end navigation -->
+			</div> <!-- end container-fluid -->
+		</div> <!-- end navbar-custom -->
+	</div>
+	<!-- Top Bar End -->
 
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<div class="page-wrapper">
 
-		<link rel="shortcut icon" href="~/images/favicon.ico" />
-	</head>
-	<body class="page-parent template-slider color-blue layout-full-width header-fixed subheader-transparent sticky-header sticky-white subheader-title-left">
-		<!-- Main Theme Wrapper -->
-		<div id="Wrapper">
-			<!-- Header Wrapper -->
-			<div id="Header_wrapper">
-				<!-- Header -->
-				<header id="Header">
-					<!-- Header -  Logo and Menu area -->
-					<div id="Top_bar">
-						<div class="container">
-							<div class="column one">
-								<div class="top_bar_left clearfix">
-									<!-- Logo-->
-									<div class="logo">
-										<a id="logo" asp-area="" asp-controller="Home" title="BeTheme - Best Html Theme Ever">
-											<img class="scale-with-grid" src="~/images/logo1.png" alt="BeTheme - Best Html Theme Ever" />
-										</a>
-									</div>
-									<!-- Main menu-->
-									<div class="menu_wrapper">
-										<nav id="menu">
-											<ul id="menu-main-menu" class="menu">
-												<li>
-													<a href="features-color-skins.html"><span>Features</span></a>
-												</li>
-												<li class="current-menu-item">
-													<a href="home-modern-header.html"><span>Headers</span></a>
-													<ul class="sub-menu">
-														<li>
-															<a href="home-modern-header.html"><span>Modern</span></a>
-														</li>
-														<li>
-															<a href="home-classic-header.html"><span>Classic</span></a>
-														</li>
-														<li>
-															<a href="home-stack-left-header.html"><span>Stack: Left</span></a>
-														</li>
-														<li>
-															<a href="home-stack-center-header.html"><span>Stack: Center</span></a>
-														</li>
-														<li>
-															<a href="home-stack-right-header.html"><span>Stack: Right</span></a>
-														</li>
-														<li>
-															<a href="home-below-slider-header.html"><span>Below Slider</span></a>
-														</li>
-														<li>
-															<a href="home-fixed-header.html"><span>Fixed</span></a>
-														</li>
-														<li>
-															<a href="home-simple-header.html"><span>Simple</span></a>
-														</li>
-														<li>
-															<a href="home-empty-header.html"><span>Empty</span></a>
-														</li>
-														<li>
-															<a href="home-transparent-header.html"><span>Transparent </span></a>
-														</li>
-														<li>
-															<a href="index-bar.html"><span>Split <i class="icon-forward"></i></span></a>
-														</li>
-														<li>
-															<a href="index-press.html"><span>Magazine <i class="icon-forward"></i></span></a>
-														</li>
-														<li>
-															<a href="index-webdesign.html"><span>Overlay <i class="icon-forward"></i></span></a>
-														</li>
-														<li>
-															<a href="index-agency.html"><span>Creative <i class="icon-forward"></i></span></a>
-														</li>
-														<li>
-															<a href="index-disco.html"><span>Creative: Always Open <i class="icon-forward"></i></span></a>
-														</li>
-													</ul>
-												</li>
-												<li>
-													<a href="typography.html"><span>Shortcodes</span></a>
-													<ul class="sub-menu mfn-megamenu mfn-megamenu-5 mfn-megamenu-bg flv_menu_bg">
-														<li class="mfn-megamenu-cols-5">
-															<a class="mfn-megamenu-title" href="typography.html"><span>Typography</span></a>
-															<ul class="sub-menu mfn-megamenu mfn-megamenu-5 mfn-megamenu-bg flv_menu_bg">
-																<li class="scroll ">
-																	<a href="typography.html#basic"><span>Basic</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="typography.html#dropcap"><span>Dropcap &#038; Highlight</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="typography.html#tooltip"><span>Tooltip &#038; Blockquote</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="typography.html#buttons"><span>Buttons</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="typography.html#fancylinks"><span>Fancy links</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="typography.html#image"><span>Image frames</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="typography.html#forms"><span>Forms</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="typography.html#forms"><span>Icon block</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="typography.html#dividers"><span>Dividers</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="typography.html#googlefonts"><span>Google fonts</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="typography.html#alerts"><span>Alerts</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="typography.html#lists"><span>Lists &#038; Bullets lists</span></a>
-																</li>
-															</ul>
-														</li>
-														<li class="mfn-megamenu-cols-5">
-															<a class="mfn-megamenu-title" href="boxes-infographics.html"><span>Boxes &#038; Infographics</span></a>
-															<ul class="sub-menu mfn-megamenu mfn-megamenu-5 mfn-megamenu-bg flv_menu_bg">
-																<li class="scroll ">
-																	<a href="boxes-infographics.html#iconbox"><span>Icon box</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="boxes-infographics.html#flatbox"><span>Flat box</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="boxes-infographics.html#hoverbox"><span>Hover box</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="boxes-infographics.html#photobox"><span>Photo box</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="boxes-infographics.html#slidingbox"><span>Sliding box</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="boxes-infographics.html#articlebox"><span>Article box</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="boxes-infographics.html#promobox"><span>Promo box</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="boxes-infographics.html#trailerbox"><span>Trailer box</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="boxes-infographics.html#ideabox"><span>Idea box</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="boxes-infographics.html#quickfacts"><span>Quick facts</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="boxes-infographics.html#counter"><span>Counter &#038; Chart</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="boxes-infographics.html#progressbar"><span>Skills</span></a>
-																</li>
-															</ul>
-														</li>
-														<li class="mfn-megamenu-cols-5">
-															<a class="mfn-megamenu-title" href="content-blocks.html"><span>Content blocks</span></a>
-															<ul class="sub-menu mfn-megamenu mfn-megamenu-5 mfn-megamenu-bg flv_menu_bg">
-																<li class="scroll ">
-																	<a href="content-blocks.html#tabs"><span>Tabs</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-blocks.html#accordion"><span>Accordion</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-blocks.html#accordion"><span>Toggle</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-blocks.html#table"><span>Table</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-blocks.html#faq"><span>FAQ</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-blocks.html#features"><span>Features</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-blocks.html#lists"><span>Lists</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-blocks.html#pricingbox"><span>Pricing boxes</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-blocks.html#pricingtable"><span>Pricing tables</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-blocks.html#contentslider"><span>Content slider</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-blocks.html#offerslider"><span>Offer slider</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-blocks.html#offersliderthumb"><span>Offer slider thumb</span></a>
-																</li>
-															</ul>
-														</li>
-														<li class="mfn-megamenu-cols-5">
-															<a class="mfn-megamenu-title" href="content-elements.html"><span>Content elements</span></a>
-															<ul class="sub-menu mfn-megamenu mfn-megamenu-5 mfn-megamenu-bg flv_menu_bg">
-																<li class="scroll ">
-																	<a href="content-elements.html#timeline"><span>Timeline</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-elements.html#contentlink"><span>Content link</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-elements.html#howitworks"><span>How it works</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-elements.html#iconbar"><span>Icon &#038; Social bar</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-elements.html#getintouch"><span>Get in touch</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-elements.html#getintouch"><span>Opening hours</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-elements.html#getintouch"><span>Infobox</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-elements.html#mapbig"><span>Map with address box</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-elements.html#team"><span>Team &#038; Team list</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-elements.html#fancyheading"><span>Fancy heading</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-elements.html#calltoaction"><span>Call to action</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="content-elements.html#fancydivider"><span>Fancy divider</span></a>
-																</li>
-															</ul>
-														</li>
-														<li class="mfn-megamenu-cols-5">
-															<a class="mfn-megamenu-title" href="loops.html"><span>Loops</span></a>
-															<ul class="sub-menu mfn-megamenu mfn-megamenu-5 mfn-megamenu-bg flv_menu_bg">
-																<li class="scroll ">
-																	<a href="loops.html#blogslider"><span>Blog slider</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="loops.html#shopslider"><span>Shop slider</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="loops.html#portfolioslider"><span>Portfolio slider</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="loops.html#portfoliogrid"><span>Portfolio grid</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="loops.html#clients"><span>Clients</span></a>
-																</li>
-																<li class="scroll ">
-																	<a href="loops.html#testimonials"><span>Testimonials</span></a>
-																</li>
-															</ul>
-														</li>
-													</ul>
-												</li>
-											</ul>
-										</nav><a class="responsive-menu-toggle" href="#"><i class="icon-menu"></i></a>
-									</div>
 
-								</div>
-								<div class="top_bar_right">
-									<div class="top_bar_right_wrapper">
-										<div class="menu_wrapper">
-											<nav id="menu">
-												<partial name="_LoginPartial.cshtml"/>
-											</nav>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</header>
-			</div>
-			<!-- Main Content -->
-			<div id="Content">
-				<div class="content_wrapper clearfix">
-					<div class="sections_group">
-						<div class="entry-content">
-							@RenderBody()
-						</div>
-					</div>
-				</div>
-				<div id="Push"></div>"
-			</div>
-			<!-- Footer-->
-			<footer id="Footer" class="clearfix">
-				<!-- Footer copyright-->
-				<div class="footer_copy">
-					<div class="container">
-						<div class="column one">
-							<a id="back_to_top" href="#" class="button button_left button_js"><span class="button_icon"><i class="icon-up-open-big"></i></span></a>
-							<div class="copyright">
-								&copy; @dateTime Electro Store. All Right Reserved <a asp-area="" asp-controller="Home" asp-action="Index" target="_blank"> ElectroStore</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</footer>
+		<!-- Page Content-->
+		<div class="page-content">
+
+			<div class="container-fluid">
+				<!-- Page-Title -->
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="page-title-box">
+							<div class="float-right">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="javascript:void(0);">Metrica</a></li>
+									<li class="breadcrumb-item"><a href="javascript:void(0);">Pages</a></li>
+									<li class="breadcrumb-item active">Starter</li>
+								</ol><!--end breadcrumb-->
+							</div><!--end /div-->
+							<h4 class="page-title">Starter</h4>
+						</div><!--end page-title-box-->
+					</div><!--end col-->
+				</div><!--end row-->
+				<!-- end page title end breadcrumb -->
+				@RenderBody()
+
+			</div><!-- container -->
 		</div>
-
-		<!-- JS -->
-
-		<script src="~/js/jquery-2.1.4.min.js"></script>
-
-		<script src="~/js/mfn.menu.js"></script>
-		<script src="~/js/jquery.plugins.js"></script>
-		<script src="~/js/jquery.jplayer.min.js"></script>
-		<script src="~/js/animations/animations.js"></script>
-		<script src="~/js/email.js"></script>
-		<script src="~/js/scripts.js"></script>
-
-		<script src="~/plugins/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-		<script src="~/plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-
-		<script src="~/plugins/rs-plugin/js/extensions/revolution.extension.actions.min.js"></script>
-		<script src="~/plugins/rs-plugin/js/extensions/revolution.extension.layeranimation.min.js"></script>
-		<script src="~/plugins/rs-plugin/js/extensions/revolution.extension.navigation.min.js"></script>
-		@await RenderSectionAsync("Scripts", required: false)
-
-		<script>
-			jQuery(window).load(function () {
-				var retina = window.devicePixelRatio > 1 ? true : false;
-				if (retina) {
-					var retinaEl = jQuery("#logo img");
-					var retinaLogoW = retinaEl.width();
-					var retinaLogoH = retinaEl.height();
-					retinaEl.attr("src", "https://localhost:44349/images/logo-retina.png").width(retinaLogoW).height(retinaLogoH)
-				}
-			});
-		</script>
-	</body>
+		<!-- end page content -->
+		<footer class="footer text-center text-sm-left">
+			<div class="boxed-footer">
+				&copy; @DateTime.Now.Year.ToString() Metrica <span class="text-muted d-none d-sm-inline-block float-right">Crafted with <i class="mdi mdi-heart text-danger"></i> by Mannatthemes</span>
+			</div>
+		</footer><!--end footer-->
+	</div>
+	<!-- end page-wrapper -->
+	<!-- jQuery  -->
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/metisMenu.min.js"></script>
+	<script src="~/js/waves.min.js"></script>
+	<script src="~/js/jquery.slimscroll.min.js"></script>
+	@await RenderSectionAsync("MainScripts", required: false)
+	<!-- App js -->
+	<script src="~/js/app.js"></script>
+	<script src="~/js/site.js"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
 </html>

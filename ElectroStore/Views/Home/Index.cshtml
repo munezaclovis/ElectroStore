@@ -2,7 +2,26 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="product-list">
+	@foreach (Product product in ViewBag.Products)
+	{
+		var picture = product.ImageURLs.Split(',')[0];
+		<div class="col">
+			<div class="card e-co-product">
+				<a asp-area="" asp-controller="Products" asp-action="Index" asp-route-id="@product.Id">
+					<img src="@picture" alt="" class="img-fluid">
+				</a>
+				<div class="card-body product-info">
+					<a href="" class="product-title">@product.Name</a>
+					<div class="d-flex justify-content-between my-2">
+						<p class="product-price">$@product.Price</p>
+						
+					</div>
+					<button class="btn btn-cart btn-sm waves-effect waves-light"><i class="mdi mdi-cart mr-1"></i> Add To Cart</button>
+					<button class="btn btn-wishlist btn-sm waves-effect waves-light wishlist" data-toggle="tooltip" data-placement="top" title="Wishlist"><i class="mdi mdi-heart"></i></button>
+					<button class="btn btn-quickview btn-sm waves-effect waves-light quickview" data-toggle="tooltip" data-placement="top" title="Quickview"><i class="mdi mdi-magnify"></i></button>
+				</div>
+			</div>
+		</div>
+	}
 </div>

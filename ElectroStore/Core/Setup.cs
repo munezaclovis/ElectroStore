@@ -1,4 +1,5 @@
-﻿using ElectroStore.Models;
+﻿using ElectroStore.Data;
+using ElectroStore.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -14,6 +15,7 @@ namespace ElectroStore.Core
 
         public static void RunAppDefaultAsync(IServiceProvider serviceProvider)
         {
+
             RoleManager<Role> roleManager = serviceProvider.GetRequiredService<RoleManager<Role>>();
             foreach (string roleName in Setup.DefaultRoles)
             {
