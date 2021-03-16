@@ -1,4 +1,6 @@
 ﻿@model Product
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> UserManager
 
 <div class="row">
 	<div class="col-12">
@@ -17,8 +19,12 @@
 							<h2 class="pro-price">$@Model.Price</h2>
 
 							<div class="quantity mt-3 ">
-								<input class="form-control" type="number" min="0" value="0" id="example-number-input">
-								<a href="" class="btn btn-primary text-white px-4 d-inline-block"><i class="mdi mdi-cart mr-2"></i>Add to Cart</a>
+								<form asp-area="" asp-controller="Cart" asp-action="Add" method="POST">
+									<input value="@UserManager.GetUserId(User)" name="UserId" hidden="hidden" />
+									<input value="@Model.Id" name="ProductId" hidden="hidden" />
+									<input class="form-control" name="Quantity" type="number" min="0" value="1">
+									<button class="btn btn-primary text-white px-4 d-inline-block" value="submit"><i class="mdi mdi-cart mr-2"></i>Add to Cart</button>
+								</form>
 							</div>
 						</div>
 					</div><!--end col-->

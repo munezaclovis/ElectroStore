@@ -1,0 +1,96 @@
+﻿@model Cart 
+@{ 
+	double subTotal = Model.CartItems.Select(x => (x.Quantity * x.Product.Price)).Cast<double>().ToArray().Sum();
+}
+<div class="row">
+	<div class="col-lg-12">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="header-title mt-0">Shopping Cart</h4>
+				<p class="mb-4 text-muted">Frogetor morden shopping cart.</p>
+				<div class="table-responsive shopping-cart">
+					<table class="table mb-0">
+						<thead>
+							<tr>
+								<th>Product</th>
+								<th>Price</th>
+								<th>Quantity</th>
+								<th>Total</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model.CartItems)
+							{
+								double totalPrice = item.Product.Price * item.Quantity;
+							<tr>
+								<td>
+									<img src="@item.Product.ImageURLs.Split(',')[0]" alt="" height="52">
+									<p class="d-inline-block align-middle mb-0">
+										<a href="" class="d-inline-block align-middle mb-0 product-name">@item.Product.Name</a>
+										<br>
+									</p>
+								</td>
+								<td>$@item.Product.Price</td>
+								<td>
+									<input class="form-control w-25" type="number" value="@((item.Quantity > 0) ? item.Quantity : 2)" id="example-number-input1">
+								</td>
+								<td>$@totalPrice</td>
+								<td>
+									<a asp-area="" asp-controller="Cart" asp-action="Delete" asp-route-id="@item.Id" class="text-info"><i class="mdi mdi-close-circle-outline font-18"></i> Remove</a>
+								</td>
+							</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-md-6 align-self-center">
+						<div class="text-center cart-promo">
+							<img src="~/images/logo-sm.png" alt="" height="50" class="mb-2">
+							<h4 class="title-text">Have a promo code ?</h4>
+							<p class="text-muted font-13">If you have a promocode, You can take discount !</p>
+							<div class="input-group w-75 mx-auto">
+								<input type="text" class="form-control" placeholder="Use Promocode" aria-describedby="button-addon2">
+								<div class="input-group-append">
+									<button class="btn btn-primary" type="button" id="button-addon2">Apply</button>
+								</div>
+							</div>
+						</div>
+						<div class="mt-4">
+							<div class="row">
+								<div class="col-6">
+									<a asp-area="" asp-controller="Home" asp-action="Index" class="text-info"><i class="fas fa-long-arrow-alt-left mr-1"></i> Continue Shopping</a>
+								</div>
+								<div class="col-6 text-right">
+									<a href="" class="text-info">Checkout <i class="fas fa-long-arrow-alt-right ml-1"></i></a>
+								</div>
+							</div>
+						</div>
+					</div><!--end col-->
+					<div class="col-md-6">
+						<div class="total-payment">
+							<h4 class="header-title">Total Payment</h4>
+							<table class="table">
+								<tbody>
+									<tr>
+										<td class="payment-title">Subtotal</td>
+										<td>$@subTotal</td>
+									</tr>
+									<tr>
+										<td class="payment-title">Promo Code</td>
+										<td>-$10.00 @{subTotal = subTotal - 10.00;}</td>
+									</tr>
+									<tr>
+										<td class="payment-title">Total</td>
+										<td class="text-dark">$@subTotal</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div><!--end col-->
+				</div><!--end row-->
+			</div><!--end card-->
+		</div><!--end card-body-->
+	</div><!--end col-->
+</div>

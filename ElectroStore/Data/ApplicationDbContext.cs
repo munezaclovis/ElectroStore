@@ -15,6 +15,8 @@ namespace ElectroStore.Data
         public DbSet<Brand> Brands { set; get; }
         public DbSet<Category> Categories { set; get; }
         public DbSet<Product> Products { set; get; }
+        public DbSet<Cart> Carts { set; get; }
+        public DbSet<CartItem> CartItems { set; get; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -44,9 +46,11 @@ namespace ElectroStore.Data
                 var entity = entry.Entity;
                 if (entry.State == EntityState.Deleted)
                 {
-                    entry.State = EntityState.Modified;
-
-                    entity.GetType().GetProperty("Deleted").SetValue(entity, true);
+                    if (entity.GetType().GetProperty("Deleted") != null)
+                    {
+                        entity.GetType().GetProperty("Deleted").SetValue(entity, true);
+                        entry.State = EntityState.Modified;
+                    }
                 }
             }
             return base.SaveChangesAsync(cancellationToken);
@@ -74,6 +78,10 @@ namespace ElectroStore.Data
 
             builder.Entity<Product>().HasOne(p => p.Category).WithMany(c => c.Products).HasForeignKey(p => p.CategoryId);
             builder.Entity<Product>().HasOne(p => p.Brand).WithMany(c => c.Products).HasForeignKey(p => p.BrandId);
+
+
+            builder.Entity<Cart>().HasMany(x => x.CartItems).WithOne(x => x.Cart).HasForeignKey(x => x.CartId);
+            builder.Entity<CartItem>().HasOne(x => x.Product).WithMany(x => x.CartItems).HasForeignKey(x => x.ProductId);
 
 
             //Rename Identity Tables With Cute Names :)

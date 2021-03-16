@@ -42,5 +42,7 @@ namespace ElectroStore.Models
         public virtual Brand Brand { get; set; }
 
         public virtual Category Category { get; set; }
+
+        public ICollection<CartItem> CartItems{ set; get; }
     }
 }

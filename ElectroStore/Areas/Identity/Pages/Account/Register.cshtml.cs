@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using ElectroStore.Data;
 
 namespace ElectroStore.Areas.Identity.Pages.Account
 {
@@ -22,6 +23,7 @@ namespace ElectroStore.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
+        public readonly ApplicationDbContext _context;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
@@ -29,12 +31,14 @@ namespace ElectroStore.Areas.Identity.Pages.Account
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         [BindProperty]
@@ -91,6 +95,10 @@ namespace ElectroStore.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    Cart userCart = new Cart { Id = Guid.NewGuid().ToString(), UserID = user.Id};
+                    _context.Add(userCart);
+                    await _context.SaveChangesAsync();
+
                     if (user.UserName.Contains("manager"))
                     {
                         await _userManager.AddToRoleAsync(user, "Manager");

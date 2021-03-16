@@ -1,34 +1,23 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore;
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
+@inject ApplicationDbContext _context;
+
+
+@{
+	var cartSize = _context.Carts.Include(x => x.CartItems).FirstOrDefault().CartItems.Count;
+}
 
 <ul class="list-unstyled topbar-nav float-right mb-0">
 	@if (SignInManager.IsSignedIn(User))
 	{
 		<li class="dropdown notification-list">
-			<a class="nav-link dropdown-toggle arrow-none waves-light waves-effect" data-toggle="dropdown" href="#" role="button"
-			   aria-haspopup="false" aria-expanded="false">
+			<a class="nav-link dropdown-toggle arrow-none waves-light waves-effect" asp-area="" asp-controller="Cart" asp-action="Index">
 				<i class="dripicons-cart noti-icon"></i>
-				<span class="badge badge-danger badge-pill noti-icon-badge">2</span>
+				<span class="badge badge-danger badge-pill noti-icon-badge">@cartSize</span>
 			</a>
-			<div class="dropdown-menu dropdown-menu-right dropdown-lg">
-				<!-- item-->
-				<h6 class="dropdown-item-text">
-					Notifications (18)
-				</h6>
-				<div class="slimscroll notification-list">
-					<!-- item-->
-					<a href="javascript:void(0);" class="dropdown-item notify-item active">
-						<div class="notify-icon bg-success"><i class="mdi mdi-cart-outline"></i></div>
-						<p class="notify-details">Your order is placed<small class="text-muted">Dummy text of the printing and typesetting industry.</small></p>
-					</a>
-				</div>
-				<!-- All-->
-				<a href="javascript:void(0);" class="dropdown-item text-center text-primary">
-					View all <i class="fi-arrow-right"></i>
-				</a>
-			</div>
-		</li><!--end notification-list-->
+		</li>
 
 		<li class="dropdown">
 			<a class="nav-link dropdown-toggle waves-effect waves-light nav-user pr-0" data-toggle="dropdown" href="#" role="button"

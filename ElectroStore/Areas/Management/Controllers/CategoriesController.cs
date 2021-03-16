@@ -37,12 +37,12 @@ namespace ElectroStore.Areas.Management.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Add([Bind("Name,Deleted")] Category category)
+        public async Task<IActionResult> Add([Bind("Name,Deleted")] Category category)
         {
             if (ModelState.IsValid)
             {
-                //_context.Add(Category);
-                //var result = await _context.SaveChangesAsync();
+                _context.Add(category);
+                var result = await _context.SaveChangesAsync();
                 return Json(new { Status = "Success", category });
             }
             return PartialView("Add", category);
