@@ -1,19 +1,5 @@
-body {
-    margin: 0;
-    padding: 0;
-}
-
-#Wrapper {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-
-#Content {
-    flex: 1;
-}
-
-.menu :hover {
-    background-color: #a4ffff;
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
 }

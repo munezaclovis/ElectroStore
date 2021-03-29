@@ -1,0 +1,72 @@
+﻿@model Product
+@{
+	Layout = null;
+}
+<div class="modal fade" id="edit-category-modal" tabindex="-1" role="dialog" aria-labelledby="Category Modal" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title mt-0" id="modal-header">Edit Category</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			</div>
+			<div class="modal-body">
+				<form id="edit-category-form" asp-action="Edit" method="POST">
+					<div asp-validation-summary="All" class="text-danger"></div>
+					<input asp-for="Id" hidden />
+					<div class="form-group row">
+						<label asp-for="Name" class="col-sm-2 col-form-label"></label>
+						<div class="col-sm-10">
+							<input asp-for="Name" type="text" class="form-control" placeholder="Product Name">
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label asp-for="BrandId" class="col-sm-2 col-form-label"></label>
+						<div class="col-sm-10">
+							<select asp-for="BrandId" asp-items="ViewBag.Brands" class="form-control select2"></select>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label asp-for="CategoryId" class="col-sm-2 col-form-label"></label>
+						<div class="col-sm-10">
+							<select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-control select2"></select>
+						</div>
+					</div>
+
+					<input asp-for="DateAdded" hidden="hidden">
+					<input asp-for="DateUpdated" hidden="hidden">
+
+					<div class="form-group row">
+						<label asp-for="Price" class="col-sm-2 col-form-label"></label>
+						<div class="col-sm-10">
+							<input asp-for="Price" class="form-control">
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label asp-for="ImageURLs" class="col-sm-2 col-form-label"></label>
+						<div class="col-sm-10">
+							<textarea asp-for="ImageURLs" class="form-control" rows="3" placeholder="Please Enter Imega URLs with , after each one"></textarea>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<div class="col-sm-10 ml-auto">
+							<div class="custom-control custom-checkbox">
+								<input asp-for="Deleted" type="checkbox" class="custom-control-input" id="horizontalCheckbox" data-parsley-multiple="groups" data-parsley-mincheck="2">
+								<label asp-for="Deleted" class="custom-control-label" for="horizontalCheckbox"></label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-10 ml-auto">
+							<button type="submit" class="btn btn-outline-primary" data-save="modal">Save</button>
+							<button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
